@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jul 23 14:07:53 2018
+
+@author: 123
+"""
+
+
+ls=open('all_school.txt',encoding='utf-8').readlines()
+schoolls=[]  
+for line in ls:
+     schoolls.append(line.split('-jianjie-')[1].split('.')[0])
+#'大连民族大学	辽宁大连	
+##http://www.gaokaopai.com/daxue-jianjie-1006.html'.split('-jianjie-')[1].split('.')[0]
+import urllib.request as r
+url='http://www.gaokaopai.com/university-ajaxGetMajor.html'
+headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.82 Safari/537.36',
+        'X-Requested-With':'XMLHttpRequest'}
+
+f=open('辽宁错误1.txt','a',encoding='utf-8')
+for schoolid in schoolls[2214:2216]:
+    req=r.Request(url,data='id={}&type=2&city=21&state=1'.format(schoolid).encode(),headers=headers)
+    f.write(r.urlopen(req).read().decode('utf-8','ignore')+'\n')
+f.close()
