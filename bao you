@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jul 18 16:39:32 2018
+
+@author: 123
+"""
+
+url='https://s.taobao.com/search?q=%E8%A3%99%E5%AD%90&imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.2017.201856-taobao-item.1&ie=utf8&initiative_id=tbindexz_20170306&ajax=true'
+import urllib.request as r#导入联网工具包，名为为r
+data=r.urlopen(url).read().decode('utf-8','ignore')
+import json#将字符串转换为字典
+data=json.loads(data)
+
+print('包邮商品：')
+def p(x):
+    title=(data['mods']['itemlist']['data']['auctions'][y]['title'])
+    price=(data['mods']['itemlist']['data']['auctions'][y]['view_price'])
+    loc=(data['mods']['itemlist']['data']['auctions'][y]['item_loc'])
+    nick=(data['mods']['itemlist']['data']['auctions'][y]['nick'])
+    print('商品：'+str(x+1))
+    print('商品名'+str(title))
+    print('商品价格'+str(price))
+    print('发货地'+str(loc))
+    print('商品销量'+str(sales))
+for y in range(0,36):
+    if float(data['mods']['itemlist']['data']['auctions'][y]['view_free'])==0.00:
+        print(p(y))
