@@ -1,0 +1,26 @@
+ls1=open('XML高考派城市.txt',encoding='gbk').readlines()
+print('招生城市编号为：\n')
+for n in range(1,32):  
+    print(ls1[n].split('<li data-val=')[1].split('data-id')[0]+':'+ls1[n].split('claimCity')[1].split(')">')[0])
+    
+    
+ls=open('ning.txt',encoding='utf-8').readlines()
+for i in range(2,5):
+    print(ls[i].split('-jianjie-')[1].split('.')[0])  
+
+
+f=open('ning.txt',encoding='utf-8').readlines()
+ls=[]
+data=[]
+for line in f:
+    ls.append(str(line.split('(')[1].split(',')[0]))
+    data.append(int(line.split(',')[1].split(')')[0]))
+    print(ls)
+    print(data)
+
+
+    
+ls=open('ning.txt',encoding="utf-8").readlinesk()
+for line in ls[1:-1]:
+    min=line.split(",")[1].split(")")[0]
+    num=line.split("\">")[1].split
