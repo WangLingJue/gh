@@ -1,0 +1,68 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jul 18 15:42:47 2018
+
+@author: 123
+"""
+
+url='https://s.taobao.com/search?q=%E8%A3%99%E5%AD%90&imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.2017.201856-taobao-item.1&ie=utf8&initiative_id=tbindexz_20170306&ajax=true'
+import urllib.request as r#导入联网工具包，名为为r
+data=r.urlopen(url).read().decode('utf-8','ignore')
+import json#将字符串转换为字典
+data=json.loads(data)
+def look():
+    for a in range(0,4):
+        print('第'+str(a+1)+'件商品的信息为:')
+        print('a.商品标题为：',data['mods']['itemlist']['data']['auctions'][a]['title'])
+        print('b.商品价格为：',data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        print('c.商品销量为：',data['mods']['itemlist']['data']['auctions'][a]['item_loc'])
+        print('c.商品运费为：',data['mods']['itemlist']['data']['auctions'][a]['view_fee'])
+        print('d.商品发货地：',data['mods']['itemlist']['data']['auctions'][a]['view_sales'])
+        if(a+1)%4==0:
+            print('——'*30)
+look()
+def look():
+    for a in range(0,36):
+        print('第'+str(a+1)+'件商品的信息为:')
+        print('a.商品标题为：',data['mods']['itemlist']['data']['auctions'][a]['title'])
+        print('b.商品价格为：',data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        print('c.商品销量为：',data['mods']['itemlist']['data']['auctions'][a]['item_loc'])
+        print('c.商品运费为：',data['mods']['itemlist']['data']['auctions'][a]['view_fee'])
+        print('d.商品发货地：',data['mods']['itemlist']['data']['auctions'][a]['view_sales'])
+        if(a+1)%4==0:
+            print('——'*30)
+
+price_list=[]
+def price():
+    for a in range(0,36):
+        b=float(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+        price_list.append(b)
+    return price_list
+price()
+c=sorted(price_list)
+print('商品的价格从高到低排序为')
+d=list(reversed(c))
+print(c)
+
+def baoyoufou():
+    for a in range(0,36):
+        q=a
+        if float(data['mods']['itemlist']['data']['auctions'][a]['view_fee'])==0.0:
+            print('第{}件商品包邮'.format(q+1))
+baoyoufou()
+
+for i in range(0,36):
+    title=data['mods']['itemlist']['data']['auctions'][i]['title']
+    price=data['mods']['itemlist']['data']['auctions'][i]['view_price']
+    print('商品标题为：'+str(title))
+    print('价格：'+str(price))
+    v=float(str(data['mods']['itemlist']['data']['auctions'][i]['view_price']))
+    if v<=100.00:
+        print('此商品正在清仓')
+    elif v<=150.00:
+        print('此商品正在促销')
+    elif v<=250.00:
+        print('此商品尚未打折')
+    while v>=260.00:
+        print('此商品不建议购买')
+        break
