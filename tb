@@ -1,0 +1,19 @@
+Created on Wed Jul 18 14:02:24 2018
+
+@author: 123
+"""
+url='https://s.taobao.com/search?q=裙子&imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.2017.201856-taobao-item.1&ie=utf8&initiative_id=tbindexz_20170306&ajax=true'
+data=r.urlopen(url).read().decode('utf-8','ignore')
+
+import json
+data=json.loads(data)
+def qz(a):
+    print(data['mods']['itemlist']['data']['auctions'][a]['title'])
+    print(data['mods']['itemlist']['data']['auctions'][a]['view_price'])
+    print(data['mods']['itemlist']['data']['auctions'][a]['item_loc'])
+    print(data['mods']['itemlist']['data']['auctions'][a]['nick'])
+qz(0)
+qz(1)
+qz(2)
+qz(3)
+print('  ')
